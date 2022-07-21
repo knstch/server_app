@@ -31,8 +31,6 @@ app.use(cors()); //Getting rid of cors error
 app.get('/api/shop-items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const getProducts = yield products_1.Products.find();
-        if (!getProducts)
-            throw new Error("There are no products :(");
         res.status(200).send(getProducts);
     }
     catch (err) {
@@ -44,8 +42,6 @@ app.get('/api/shop-items', (req, res) => __awaiter(void 0, void 0, void 0, funct
 app.get('/api/shop-items/find-all/:search', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const getProducts = yield products_1.Products.find({ "name": { $regex: `${req.params.search}`, $options: "$i" } }, { "name": true, "img": true });
-        if (!getProducts)
-            throw new Error("There are no products :(");
         res.status(200).send(getProducts);
     }
     catch (err) {
@@ -57,8 +53,6 @@ app.get('/api/shop-items/find-all/:search', (req, res) => __awaiter(void 0, void
 app.get('/api/shop-items/category/:products', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const getProducts = yield products_1.Products.find({ "category": `${req.params.products}` });
-        if (!getProducts)
-            throw new Error("There are no products :(");
         res.status(200).send(getProducts);
     }
     catch (err) {
@@ -89,8 +83,6 @@ app.get('/api/shop-items/:_id', (req, res) => __awaiter(void 0, void 0, void 0, 
         const getProductsById = yield products_1.Products.find({ "_id": req.params._id }, {
             "name": true, "img": true, "price": true, "leftItems": true
         });
-        if (!getProductsById)
-            throw new Error("There is no selected item :(");
         res.status(200).send(getProductsById);
     }
     catch (err) {

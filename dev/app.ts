@@ -20,7 +20,6 @@ app.use(cors()) //Getting rid of cors error
 app.get('/api/shop-items', async (req, res) => {
     try {
         const getProducts = await Products.find()
-        if (!getProducts) throw new Error("There are no products :(")
         res.status(200).send(getProducts)
     } catch (err) {
         console.error(err)
@@ -31,8 +30,8 @@ app.get('/api/shop-items', async (req, res) => {
 //Find items thru input field
 app.get('/api/shop-items/find-all/:search', async (req, res) => {
     try {
-        const getProducts = await Products.find({ "name": { $regex: `${req.params.search}`, $options: "$i" } }, { "name": true, "img": true })
-        if (!getProducts) throw new Error("There are no products :(")
+        const getProducts = await Products.find({ "name": { $regex: `${req.params.search}`, $options: "$i" } },
+        { "name": true, "img": true })
         res.status(200).send(getProducts)
     } catch (err) {
         console.error(err)
@@ -44,7 +43,6 @@ app.get('/api/shop-items/find-all/:search', async (req, res) => {
 app.get('/api/shop-items/category/:products', async (req, res) => {
     try {
         const getProducts = await Products.find({ "category": `${req.params.products}` })
-        if (!getProducts) throw new Error("There are no products :(")
         res.status(200).send(getProducts)
     } catch (err) {
         console.error(err)
@@ -75,7 +73,6 @@ app.get('/api/shop-items/:_id', async (req, res) => {
             {
                 "name": true, "img": true, "price": true, "leftItems": true
             })
-        if (!getProductsById) throw new Error("There is no selected item :(")
         res.status(200).send(getProductsById)
     } catch (err) {
         console.error(err)
