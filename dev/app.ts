@@ -41,7 +41,7 @@ app.get('/api/shop-items/find-all/:search', async (req, res) => {
 })
 
 //Find products in certain category
-app.get('/api/shop-items/:products', async (req, res) => {
+app.get('/api/shop-items/category/:products', async (req, res) => {
     try {
         const getProducts = await Products.find({ "category": `${req.params.products}` })
         if (!getProducts) throw new Error("There are no products :(")

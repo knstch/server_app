@@ -54,7 +54,7 @@ app.get('/api/shop-items/find-all/:search', (req, res) => __awaiter(void 0, void
     }
 }));
 //Find products in certain category
-app.get('/api/shop-items/:products', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/shop-items/category/:products', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const getProducts = yield products_1.Products.find({ "category": `${req.params.products}` });
         if (!getProducts)
